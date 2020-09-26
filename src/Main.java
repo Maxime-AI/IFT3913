@@ -4,33 +4,44 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Main {
+
     public static void main(String[] args) throws Exception {
 
+        int loc = 0;
+        int cloc = 0;
+        int dc = 0;
+
         List<File> filesInFolder = Files.walk(Paths.get("codeSource"))
-                .filter(Files::isRegularFile)
+                .filter(p -> p.getFileName().toString().endsWith(".java"))
                 .map(Path::toFile)
                 .collect(Collectors.toList());
 
-        System.out.println(filesInFolder);
-
-        for (File path:filesInFolder) {
+        for (File path : filesInFolder) {
             File file = new File(String.valueOf(path));
             BufferedReader br = new BufferedReader(new FileReader(file));
 
-            int x = 0;
             String st;
             while ((st = br.readLine()) != null) {
-                if ("".equals(st) ) {continue;}
-                else if (st.contains("//")) {continue;}
-                else if (st.contains("/*")) {continue;}
-                else if (st.endsWith("*/")) {continue;}
-                System.out.println(x);
-                x++;
+                st = st.replaceAll(" ", "");
+                if ("".equals(st) || st.startsWith("import")) {
+                    continue;
+                } else if (st.startsWith("//") || st.startsWith("*") || st.startsWith("/*") || st.startsWith("*/") || st.endsWith("*/") || st.startsWith("/**")) {
+                    cloc++;
+                    continue;
+                } else if (st.contains("//") || (st.contains("/*") && st.contains("*/"))) {
+                    loc++;
+                    cloc++;
+                    continue;
+                }
+                loc++;
             }
-            System.out.println(x);
-            System.out.println(path);
+            dc = (int) ((double) cloc / loc * 100);
         }
+        System.out.println(dc);
+        System.out.println(loc);
+        System.out.println(cloc);
     }
+    
 }
 
 
