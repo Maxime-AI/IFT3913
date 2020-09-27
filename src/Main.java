@@ -25,7 +25,8 @@ public class Main {
                 st = st.replaceAll(" ", "");
                 if ("".equals(st) || st.startsWith("import")) {
                     continue;
-                } else if (st.startsWith("//") || st.startsWith("*") || st.startsWith("/*") || st.startsWith("*/") || st.endsWith("*/") || st.startsWith("/**")) {
+                } else if (st.startsWith("//") || st.startsWith("*") || st.startsWith("/*") || st.startsWith("*/")
+                        || st.endsWith("*/") || st.startsWith("/**")) {
                     cloc++;
                     continue;
                 } else if (st.contains("//") || (st.contains("/*") && st.contains("*/"))) {
