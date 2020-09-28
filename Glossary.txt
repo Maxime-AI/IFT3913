@@ -1,0 +1,5 @@
+ - Commentary lines of code(CLOC) : The number of commentary lines of code found in a file.  
+
+ - Lines of code(LOC) : The number of non-empty and non-commentary lines of code, also known as lines of source code(SLOC), found in a file.
+
+ - Comments density(DC) : The ratio of comments(CLOC) per lines of code(LOC) in a program file.
