@@ -6,12 +6,15 @@ import java.util.List;
 
 public class Parser {
 
-//    public int methodLOC = 0;
-//    public int methodCLOC = 0;
-//    ArrayList<ArrayList<String>> methodData = new ArrayList<>();
+      private int methodLOC = 0;
+      private int methodCLOC = 0;
+      private ArrayList<ArrayList<String>> methodsData = new ArrayList<>();
+      private ArrayList<ArrayList<String>> classesData = new ArrayList<>();
+
+      public void Parser(){}
 
     public ArrayList<ArrayList<String>> getClassData(List<File> filesList) throws Exception {
-        ArrayList<ArrayList<String>> classesData = new ArrayList<>();
+        //ArrayList<ArrayList<String>> classesData = new ArrayList<>();
         //chemin, class, classe_LOC, classe_CLOC, classe_DC
 
         for (File path : filesList) {
@@ -50,9 +53,22 @@ public class Parser {
             classData.add(classDC + "");
 
             classesData.add(classData);
+            br.close();
         }
         return classesData;
     }
+    public ArrayList<ArrayList<String>> getMethodsData(List<File> filesList) throws Exception {
+
+        for (File path : filesList) {
+            int classLOC = 0;
+            int classCLOC = 0;
+            double classDC;
+            ArrayList<String> methodData = new ArrayList<>();
+            File file = new File(String.valueOf(path));
+            BufferedReader br = new BufferedReader(new FileReader(file));
+        }
+        return methodsData;
+      }
 
 }
 
