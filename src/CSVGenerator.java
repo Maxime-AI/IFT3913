@@ -23,4 +23,21 @@ public class CSVGenerator {
             e.printStackTrace();
         }
     }
+    public void generateMethodCSV(ArrayList<ArrayList<String>> list) {
+        File csvFile = new File("methods.csv");
+        try (PrintWriter csvWriter = new PrintWriter(new FileWriter(csvFile))) {
+            csvWriter.append("chemin, class, method, method_LOC,  method_CLOC, method_DC");
+            csvWriter.append('\n');
+            for (ArrayList<String> line : list) {
+                for (String data : line) {
+                    csvWriter.append(data);
+                    csvWriter.append(',');
+                }
+                csvWriter.append('\n');
+            }
+            csvWriter.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

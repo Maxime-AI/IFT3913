@@ -11,9 +11,10 @@ public class Main {
         FilesManager filesManager = new FilesManager();
         Parser parser = new Parser();
         List<File> filesList = filesManager.getFiles("sourceFolder");
-        ArrayList<ArrayList<String>> data = parser.getClassData(filesList);
-        System.out.println(data);
-
+        ArrayList<ArrayList<String>> classesData = parser.getClassData(filesList);
+        ArrayList<ArrayList<String>> MethodsData = parser.getMethodsData(filesList);
+        System.out.println(classesData);
+        System.out.println(MethodsData);
 //        System.out.println(data.toArray().length);
 //        long time = System.currentTimeMillis() - start;
 //        System.out.println(time);
