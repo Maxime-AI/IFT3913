@@ -1,17 +1,10 @@
 import java.io.*;
-// We need to provide file path as the parameter:
-// double backquote is to avoid compiler interpret words
-// like \test as \t (ie. as a escape sequence)
-
-/**
- * alllo les amis
- * comment ca va
- * oui toi
- */
 public class test {
     public static void main(String[] args) {
         int x = 6; //increment
         for (int i = 0; i < x; i++) /* blablabla */
+        //
+            //
             or(File path :filesList){
             ArrayList<String> methodData = new ArrayList<>();
             File file = new File(String.valueOf(path));
@@ -21,12 +14,22 @@ public class test {
             methodData.add(path.getName().replace(".java", ""));
         }
     }
-
-    public void allo(args) {
+    public void allo(String args, int x, String x) {
         String = "";
         //allo
     }
+
+    public XYPointerAnnotation(String label, double x, double y, double angle) {
+
+        super(label, x, y);
+        this.angle = angle;
+        this.tipRadius = DEFAULT_TIP_RADIUS;
+        this.baseRadius = DEFAULT_BASE_RADIUS;
+        this.arrowLength = DEFAULT_ARROW_LENGTH;
+        this.arrowWidth = DEFAULT_ARROW_WIDTH;
+        this.labelOffset = DEFAULT_LABEL_OFFSET;
+        this.arrowStroke = new BasicStroke(1.0f);
+        this.arrowPaint = Color.BLACK;
+
+    }
 }
-/*
-//
-*/

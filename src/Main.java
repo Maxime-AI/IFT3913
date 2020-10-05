@@ -16,13 +16,15 @@ public class Main {
 //        ArrayList<ArrayList<String>> classesData = parser.getClassData(filesList);
         ArrayList<ArrayList<String>> methodsData = parser.getMethodsData(filesList);
 //        System.out.println(classesData);
-        System.out.println(methodsData);
         csvGenerator.generateMethodCSV(methodsData);
+        System.out.println(methodsData);
 //        csvGenerator.generateClassCSV(classesData);
 //        System.out.println(data.toArray().length);
 //        long time = System.currentTimeMillis() - start;
 //        System.out.println(time);
 //        generateCSV(data);
+        String x = "public void allo(String args, int x, String x) {".replace(" ", "");
+
 
     }
 }
