@@ -11,9 +11,12 @@ public class Parser {
 
     private int classLOC = 0;
     private int classCLOC = 0;
+    private  int methodLOC;
+    private int methodCLOC;
+    private double methodDC;
     private ArrayList<ArrayList<String>> methodsData = new ArrayList<>();
     private ArrayList<ArrayList<String>> classesData = new ArrayList<>();
-    boolean methodBool = false;
+    boolean methodBool ;
 
     public void Parser() {
     }
@@ -65,59 +68,64 @@ public class Parser {
             File file = new File(String.valueOf(path));
             BufferedReader br = new BufferedReader(new FileReader(file));
 
-            int methodLOC = 0;
-            int methodCLOC = 0;
             String st;
             while ((st = br.readLine()) != null) {
                 st = st.replaceAll(" ", "");
 
+
                 if (st.endsWith("{") && (st.startsWith("public") || st.startsWith("private") || st.startsWith("protected"))
                         && (st.contains("int") || st.contains("boolean") || st.contains("void") || st.contains("String"))) {
 
-                    String method = "";
-                    method += st;
-                    methodData.add(path.getPath());
-                    methodData.add(path.getName().replace(".java", ""));
-                    methodData.add(method);
+                        this.methodBool = true;
+                        String method = "";
+                        method += st;
+                        methodData.add(path.getPath());
+                        methodData.add(path.getName().replace(".java", ""));
+                        methodData.add(method);
 //                    String[] string = "               public static void main(String[] args) throws Exception {".split(" ");
 //                    String[] objects = Arrays.stream(string).filter(x -> !x.isEmpty()).toArray(String[]::new);
 //        https://stackoverflow.com/questions/41935581/removing-empty-element-from-arrayjava/41935895#41935895
 //                    System.out.println(Arrays.toString(objects));
 
-                    if(methodBool){
-                        methodLOC = 0;
-                        methodCLOC = 0;
-                        methodBool = false;
-                        methodsData.add(methodData);
-                        methodData = new ArrayList<>();
-                    }
-                    methodBool = true;
-                    methodData.add(methodLOC + "");
-                    methodData.add(methodCLOC + "");
-                    double methodDC = ((double) methodCLOC / methodLOC);
-                    methodData.add(methodDC + "");
-                } else {
-                    methodBool = false;
+                       /* methodData.add(methodLOC + "");
+                        methodData.add(methodCLOC + "");
+                        methodDC = ((double) methodCLOC / methodLOC);
+                        methodData.add(methodDC + "");*/
+
+                        while (methodBool) {
+                            if ("".equals(st)) {
+                                continue;
+                            } else if (st.startsWith("//") || st.startsWith("*") || st.startsWith("/*") || st.startsWith("*/")
+                                    || st.endsWith("*/") || st.startsWith("/**")) {
+                                methodLOC++;
+                                System.out.println(methodLOC+"s");
+                                methodCLOC++;
+                                continue;
+                            } else if (st.contains("//") || (st.contains("/*") && st.contains("*/"))) {
+                                methodLOC++;
+                                System.out.println(methodLOC+"L");
+                                methodCLOC++;
+                                continue;
+                            }if (methodBool) {
+                               methodLOC++;
+                               methodCLOC++;
+                               this.methodBool = false;
+                                methodData.add(methodLOC + "");
+                                methodData.add(methodCLOC + "");
+                                methodDC = ((double) methodCLOC / methodLOC);
+                                methodData.add(methodDC + "");
+                                methodsData.add(methodData);
+                                methodData = new ArrayList<>();
+                            } else {
+                                this.methodBool = true;
+                            }
+                            methodLOC++;
+                            System.out.println(methodLOC + "M");
+                        }
+
                 }
-                if(methodBool){
-                    if ("".equals(st)) {
-                        continue;
-                    } else if (st.startsWith("//") || st.startsWith("*") || st.startsWith("/*") || st.startsWith("*/")
-                            || st.endsWith("*/") || st.startsWith("/**")) {
-                        methodLOC++;
-                        methodCLOC++;
-                        continue;
-                    } else if (st.contains("//") || (st.contains("/*") && st.contains("*/"))) {
-                        methodLOC++;
-                        methodCLOC++;
-                        continue;
-                    }
-                }
-                methodLOC++;
+
             }
-
-            methodsData.add(methodData);
-
             br.close();
         }
         return methodsData;
