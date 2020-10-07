@@ -55,17 +55,17 @@ public class Parser {
                     classCLOC++;
                     continue;
                 } else if (st.contains("for")||st.contains("if")||st.contains("else if")||st.contains("while")|| st.contains("switch")) {
-                    wmc++;
+                    //wmc++;
 
                 } else if (st.contains("&&")||st.contains("||")) {
-                    wmc++;
+                   // wmc++;
 
                 }
 
                 classLOC++;
             }
             double  class_BC = (classDC(classCLOC,classLOC))/wmc;
-            classData.add(wmc +"");
+            classData.add(wmc(methodsData) +"");
             classData.add(class_BC+"");
             classData.add(classLOC + "");
             classData.add(classCLOC + "");
@@ -81,6 +81,13 @@ public class Parser {
         this.classCLOC = classCLOC;
         double classDC;
         return classDC = ((double) classCLOC / classLOC);
+    }
+    public double wmc(ArrayList<ArrayList<String>>methodsData) {
+        int wmc = 0;
+        for (int i = 0; i < methodData.size(); i++) {
+            wmc += Integer.parseInt(methodData.get(3));
+        }
+        return wmc;
     }
 
     public ArrayList<ArrayList<String>> getMethodsData(List<File> filesList) throws Exception {
@@ -128,6 +135,7 @@ public class Parser {
                 methodData.add(methodCLOC + "");
                 methodData.add(methodDC(methodCLOC,methodLOC) + "");
                 methodsData.add(methodData);
+
             }
         }
         return methodsData;
