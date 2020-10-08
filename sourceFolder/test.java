@@ -16,6 +16,13 @@ public class test {
     }
     public void allo(String args, int x, String x) {
         String = "";
+        {
+            if (a)
+                if (b)
+                    x=1;
+                else
+                    x=2;
+        }
         //allo
     }
 

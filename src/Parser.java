@@ -4,114 +4,159 @@ import java.io.FileReader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Parser {
 
-    private int classLOC = 0;
-    private int classCLOC = 0;
+    private ArrayList<Integer> WMCList = new ArrayList<>();
 
-    private ArrayList<ArrayList<String>> methodsData = new ArrayList<>();
-    private ArrayList<ArrayList<String>> classesData = new ArrayList<>();
-
-    public Parser() {
-    }
-
+    /**
+     *
+     * @param filesList
+     * @return ArrayList<ArrayList<String>> data of every class in the folder
+     * @throws Exception
+     */
     public ArrayList<ArrayList<String>> getClassData(List<File> filesList) throws Exception {
-        //ArrayList<ArrayList<String>> classesData = new ArrayList<>();
-        //chemin, class, classe_LOC, classe_CLOC, classe_DC
+        ArrayList<ArrayList<String>> classesData = new ArrayList<>();
+        int index = 0;
 
         for (File path : filesList) {
-            ArrayList<String> classData = new ArrayList<>();
-            File file = new File(String.valueOf(path));
-            BufferedReader br = new BufferedReader(new FileReader(file));
+            BufferedReader br = new BufferedReader(new FileReader(new File(String.valueOf(path))));
+            String className = path.getName().replace(".java", "");
+            int classLOC = 0;
+            int classCLOC = 0;
+            String line;
 
-            classData.add(path.getPath());
-            classData.add(path.getName().replace(".java", ""));
+            while ((line = br.readLine()) != null) {
+                line = line.replaceAll(" ", "");
 
-            String st;
-            while ((st = br.readLine()) != null) {
-                st = st.replaceAll(" ", "");
-                if ("".equals(st)) {
+                if ("".equals(line)) {
                     continue;
-                } else if (st.startsWith("//") || st.startsWith("*") || st.startsWith("/*") || st.startsWith("*/")
-                        || st.endsWith("*/") || st.startsWith("/**")) {
-                    classLOC++;
-                    classCLOC++;
-                    continue;
-                } else if (st.contains("//") || (st.contains("/*") && st.contains("*/"))) {
+                } else if (isComment(line)) {
                     classLOC++;
                     classCLOC++;
                     continue;
                 }
+
                 classLOC++;
             }
-            double classDC = ((double) classCLOC / classLOC);
-            classData.add(classLOC + "");
-            classData.add(classCLOC + "");
-            classData.add(classDC + "");
-            classesData.add(classData);
 
+            double classDC = ((double) classCLOC / classLOC);
+            double classBC = classDC / WMCList.get(index);
+            List<String> data = Arrays.asList(path.getPath(), className, classLOC + "", classCLOC + "", classDC + "",
+                    WMCList.get(index) + "", classBC + "");
+            classesData.add(new ArrayList<>(data));
             br.close();
+            index++;
+
         }
         return classesData;
     }
 
+    /**
+     *
+     * @param filesList
+     * @return ArrayList<ArrayList<String>> data of every method in the folder
+     * @throws Exception
+     */
     public ArrayList<ArrayList<String>> getMethodsData(List<File> filesList) throws Exception {
-        //chemin, class, method, method_LOC, method_CLOC, method_DC
+        ArrayList<ArrayList<String>> methodsData = new ArrayList<>();
+
         for (File path : filesList) {
-            File file = new File(String.valueOf(path));
             List<String> lines = Files.readAllLines(Paths.get(String.valueOf(path)));
             ArrayList<String> methods = findMethods(lines);
-            ArrayList<ArrayList<String>> methodsCode = getMethodCode(lines);
+            int WMC = 0;
 
             for (String method : methods) {
-                ArrayList<String> methodData = new ArrayList<>();
-                methodData.add(path.getPath());
-                methodData.add(path.getName().replace(".java", ""));
-                methodData.add(method);
+                String className = path.getName().replace(".java", "");
                 ArrayList<String> temp = findMethodContent(lines, method);
                 int methodLOC = 0;
                 int methodCLOC = 0;
-                for (int i = 0; i < temp.size(); i++) {
-                    String string = temp.get(i).replaceAll(" ", "");;
-                    if ("".equals(string)) {
+                int methodCC = 1;
+
+                for (String line : temp) {
+                    line = line.replaceAll(" ", "");
+
+                    if ("".equals(line)) {
                         continue;
-                    } else if (string.startsWith("//") || string.startsWith("*") || string.startsWith("/*") || string.startsWith("*/")
-                            || string.endsWith("*/") || string.startsWith("/**")) {
+                    } else if (isComment(line)) {
                         methodLOC++;
                         methodCLOC++;
                         continue;
-                    } else if (string.contains("//") || (string.contains("/*") && string.contains("*/"))) {
-                        methodLOC++;
-                        methodCLOC++;
+                    } else if (checkCC(line)) {
+                        methodCC++;
                         continue;
                     }
                     methodLOC++;
                 }
-                methodData.add(methodLOC + "");
-                methodData.add(methodCLOC + "");
+                WMC += methodCC;
                 double methodDC = ((double) methodCLOC / methodLOC);
-                methodData.add(methodDC + "");
-                methodsData.add(methodData);
+                double methodBC = (methodDC / methodCC);
+                List<String> data = Arrays.asList(path.getPath(), className, method, methodLOC + "", methodCLOC + "",
+                        methodDC + "", methodCC + "", methodBC + "");
+                methodsData.add(new ArrayList<>(data));
             }
+            WMCList.add(WMC);
         }
         return methodsData;
     }
 
+    /**
+     *
+     * @param line
+     * @return
+     */
+    public boolean checkCC(String line) {
+        return line.contains("for") || line.contains("if") || line.contains("else if") || line.contains("while") ||
+                line.contains("switch") || line.contains("&&") || line.contains("||");
+    }
+
+    /**
+     *
+     * @param line
+     * @return
+     */
+    public boolean isComment(String line) {
+        return line.startsWith("//") || line.startsWith("*") || line.startsWith("/*") || line.startsWith("*/")
+                || line.endsWith("*/") || line.startsWith("/**") || line.contains("//") || (line.contains("/*") &&
+                line.contains("*/"));
+    }
+
+    /**
+     *
+     * @param line
+     * @return
+     */
+    public boolean isMethod(String line) {
+        return line.endsWith("{") && (line.startsWith("public") || line.startsWith("private") ||
+                line.startsWith("protected")) && (line.contains("int") || line.contains("boolean") ||
+                line.contains("void") || line.contains("String")) && !line.startsWith("public class");
+    }
+
+    /**
+     *
+     * @param lines
+     * @return
+     */
     public ArrayList<String> findMethods(List<String> lines) {
         ArrayList<String> methods = new ArrayList<>();
-        int counter = 0;
-        boolean x = false;
+
         for (String st : lines) {
             st = st.replaceAll(" ", "");
-            if (isMethodBool(st)) {
+            if (isMethod(st)) {
                 methods.add(st);
             }
         }
         return methods;
     }
 
+    /**
+     *
+     * @param lines
+     * @param method
+     * @return
+     */
     public ArrayList<String> findMethodContent(List<String> lines, String method) {
         int bracketCount = 0;
         boolean boolMethod = false;
@@ -126,7 +171,6 @@ public class Parser {
                     bracketCount++;
                 }
             } else if (boolMethod) {
-
                 tempArray.add(line);
                 if (!line.contains("}") && line.contains("{")) {
                     bracketCount++;
@@ -152,27 +196,5 @@ public class Parser {
 //        }
 //        return String.join("", tempArray);
 //    }
-
-    public ArrayList<ArrayList<String>> getMethodCode(List<String> lines) {
-        ArrayList<String> methods = findMethods(lines);
-        ArrayList<ArrayList<String>> methodsCode = new ArrayList<>();
-        for (int i = 0; i < methods.size(); i++) {
-            ArrayList<String> temp = new ArrayList<>();
-            if (methods.size() == 1) {
-                temp.addAll(lines);
-            } else if (i == methods.size() - 1) {
-                temp.addAll(lines);
-            }
-            methodsCode.add(temp);
-        }
-        return methodsCode;
-    }
-
-    public boolean isMethodBool(String st) {
-        st = st.replaceAll(" ", "");
-        return st.endsWith("{") && (st.startsWith("public") || st.startsWith("private") || st.startsWith("protected"))
-                && (st.contains("int") || st.contains("boolean") || st.contains("void") || st.contains("String")) &&
-                !st.startsWith("public class");
-    }
 
 }
