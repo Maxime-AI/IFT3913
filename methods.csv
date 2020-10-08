@@ -1,4 +1,4 @@
 chemin, class, method, method_LOC,  method_CLOC, method_DC
-sourceFolder\test.java,test,publicstaticvoidmain(String[]args){,1,0.3076923076923077,13,4,0.3076923076923077,sourceFolder\test.java,test,publicvoidallo(Stringargs,intx,Stringx){,1,0.25,4,1,0.25,sourceFolder\test.java,test,publicXYPointerAnnotation(Stringlabel,doublex,doubley,doubleangle){,3,0.0,16,0,0.0,
-sourceFolder\test.java,test,publicstaticvoidmain(String[]args){,1,0.3076923076923077,13,4,0.3076923076923077,sourceFolder\test.java,test,publicvoidallo(Stringargs,intx,Stringx){,1,0.25,4,1,0.25,sourceFolder\test.java,test,publicXYPointerAnnotation(Stringlabel,doublex,doubley,doubleangle){,3,0.0,16,0,0.0,
-sourceFolder\test.java,test,publicstaticvoidmain(String[]args){,1,0.3076923076923077,13,4,0.3076923076923077,sourceFolder\test.java,test,publicvoidallo(Stringargs,intx,Stringx){,1,0.25,4,1,0.25,sourceFolder\test.java,test,publicXYPointerAnnotation(Stringlabel,doublex,doubley,doubleangle){,3,0.0,16,0,0.0,
+sourceFolder\test.java,test,publicstaticvoidmain(String[]args){,13,4,0.3076923076923077,
+sourceFolder\test.java,test,publicvoidallo(Stringargs,intx,Stringx){,4,1,0.25,
+sourceFolder\test.java,test,publicXYPointerAnnotation(Stringlabel,doublex,doubley,doubleangle){,11,0,0.0,

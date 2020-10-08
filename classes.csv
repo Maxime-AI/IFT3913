@@ -1,2 +1,4 @@
-WMC, classe_BC,chemin, class, classe_LOC, classe_CLOC, classe_DC
-sourceFolder\test.java,test,2,0.06578947368421052,38,5,0.13157894736842105,
+chemin, class, classe_LOC, classe_CLOC, classe_DC
+sourceFolder\test - Copy (2).java,test - Copy (2),15,14,0.9333333333333333,
+sourceFolder\test - Copy.java,test - Copy,30,28,0.9333333333333333,
+sourceFolder\test.java,test,45,42,0.9333333333333333,

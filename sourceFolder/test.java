@@ -20,15 +20,6 @@ public class test {
     }
 
     public XYPointerAnnotation(String label, double x, double y, double angle) {
-        for (alo:
-            methode ) {
-            if(x){
-
-            }else{
-                y;
-            }
-
-        }
 
         super(label, x, y);
         this.angle = angle;

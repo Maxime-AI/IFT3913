@@ -13,13 +13,13 @@ public class Main {
         Parser parser = new Parser();
         CSVGenerator csvGenerator = new CSVGenerator();
         List<File> filesList = filesManager.getFiles("sourceFolder");
-        ArrayList<ArrayList<String>> classesData = parser.getClassData(filesList);
+//        ArrayList<ArrayList<String>> classesData = parser.getClassData(filesList);
         ArrayList<ArrayList<String>> methodsData = parser.getMethodsData(filesList);
-       System.out.println(classesData);
+//        System.out.println(classesData);
         csvGenerator.generateMethodCSV(methodsData);
         System.out.println(methodsData);
-       csvGenerator.generateClassCSV(classesData);
-//       System.out.println(data.toArray().length);
+//        csvGenerator.generateClassCSV(classesData);
+//        System.out.println(data.toArray().length);
 //        long time = System.currentTimeMillis() - start;
 //        System.out.println(time);
 //        generateCSV(data);
