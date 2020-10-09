@@ -5,8 +5,10 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
-import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Parser {
 
@@ -90,7 +92,7 @@ public class Parser {
                 WMC += methodCC;
                 double methodDC = ((double) methodCLOC / methodLOC);
                 double methodBC = (methodDC / methodCC);
-                methodsData.add(addMethodData(path.getPath(), className, method.replaceAll(",", ""),
+                methodsData.add(addMethodData(path.getPath(), className, cleanMethodName(method),
                         methodLOC + "", methodCLOC + "", methodDC + "",
                         methodCC + "", methodBC + ""));
             }
@@ -99,6 +101,18 @@ public class Parser {
         return methodsData;
     }
 
+    /**
+     *
+     * @param path
+     * @param className
+     * @param method
+     * @param methodLOC
+     * @param methodCLOC
+     * @param methodDC
+     * @param methodCC
+     * @param methodBC
+     * @return
+     */
     public ArrayList<String> addMethodData(String path, String className, String method, String methodLOC,
                                            String methodCLOC, String methodDC, String methodCC, String methodBC) {
         ArrayList<String> data = new ArrayList<>();
@@ -113,6 +127,38 @@ public class Parser {
         return data;
     }
 
+    /**
+     *
+     * @param line
+     * @return
+     */
+    public String cleanMethodName(String line) {
+        String temp = line.replace("(", " ").replace(")", " ").replace("{", "").replace(",", "");
+
+        List<String> list = Stream.of(temp.split(" "))
+                .map(String::trim)
+                .collect(Collectors.toList());
+
+        list.removeAll(Collections.singleton(""));
+        if (list.contains("static")) {
+            list.remove(0);
+        }
+        list.remove(0);
+        list.remove(0);
+
+        if (list.contains("throws")) {
+            list.remove(list.size() - 1);
+            list.remove(list.size() - 1);
+        }
+
+        StringBuilder method = new StringBuilder();
+        method.append(list.get(0));
+        for (int i = 1; i < list.size(); i += 2) {
+            method.append("_").append(list.get(i));
+        }
+
+        return method.toString();
+    }
 
     /**
      * @param line
@@ -139,7 +185,7 @@ public class Parser {
      */
     public boolean isMethod(String line) {
         // regex source : https://stackoverflow.com/questions/68633/regex-that-will-match-a-java-method-declaration
-        String regex = "(public|protected|private|static|\\s) +[\\w\\<\\>\\[\\]]+\\s+(\\w+) *\\([^\\)]*\\) *(\\{?|[^;])";
+        String regex = "(public|protected|private|static|\\s) +[\\w\\<\\>\\[\\],\\s]+\\s+(\\w+) *\\([^\\)]*\\) *(\\{?|[^;])";
         return line.matches(regex);
     }
 
