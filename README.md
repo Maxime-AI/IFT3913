@@ -2,7 +2,8 @@
 Les classes et méthodes les moins bien commentées du projet jfreechart
 =======================================================================
 
-  Classe 
+  
+         Classe 
 	=========
   
 	1 .Name: XYPlot       | loc: 5068 cloc: 2344 class_DC: 0.46251 wmc: 446 class_BC: 0.001037
