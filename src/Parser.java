@@ -6,15 +6,15 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class Parser {
 
     private ArrayList<Integer> WMCList = new ArrayList<>();
 
     /**
-     *
      * @param filesList
-     * @return ArrayList<ArrayList<String>> data of every class in the folder
+     * @return ArrayList<ArrayList < String>> data of every class in the folder
      * @throws Exception
      */
     public ArrayList<ArrayList<String>> getClassData(List<File> filesList) throws Exception {
@@ -29,7 +29,7 @@ public class Parser {
             String line;
 
             while ((line = br.readLine()) != null) {
-                line = line.replaceAll(" ", "");
+                line = line.trim();
 
                 if ("".equals(line)) {
                     continue;
@@ -38,7 +38,6 @@ public class Parser {
                     classCLOC++;
                     continue;
                 }
-
                 classLOC++;
             }
 
@@ -55,9 +54,8 @@ public class Parser {
     }
 
     /**
-     *
      * @param filesList
-     * @return ArrayList<ArrayList<String>> data of every method in the folder
+     * @return ArrayList<ArrayList < String>> data of every method in the folder
      * @throws Exception
      */
     public ArrayList<ArrayList<String>> getMethodsData(List<File> filesList) throws Exception {
@@ -76,8 +74,6 @@ public class Parser {
                 int methodCC = 1;
 
                 for (String line : temp) {
-                    line = line.replaceAll(" ", "");
-
                     if ("".equals(line)) {
                         continue;
                     } else if (isComment(line)) {
@@ -90,20 +86,35 @@ public class Parser {
                     }
                     methodLOC++;
                 }
+
                 WMC += methodCC;
                 double methodDC = ((double) methodCLOC / methodLOC);
                 double methodBC = (methodDC / methodCC);
-                List<String> data = Arrays.asList(path.getPath(), className, method, methodLOC + "", methodCLOC + "",
-                        methodDC + "", methodCC + "", methodBC + "");
-                methodsData.add(new ArrayList<>(data));
+                methodsData.add(addMethodData(path.getPath(), className, method.replaceAll(",", ""),
+                        methodLOC + "", methodCLOC + "", methodDC + "",
+                        methodCC + "", methodBC + ""));
             }
             WMCList.add(WMC);
         }
         return methodsData;
     }
 
+    public ArrayList<String> addMethodData(String path, String className, String method, String methodLOC,
+                                           String methodCLOC, String methodDC, String methodCC, String methodBC) {
+        ArrayList<String> data = new ArrayList<>();
+        data.add(path);
+        data.add(className);
+        data.add(method);
+        data.add(methodLOC);
+        data.add(methodCLOC);
+        data.add(methodDC);
+        data.add(methodCC);
+        data.add(methodBC);
+        return data;
+    }
+
+
     /**
-     *
      * @param line
      * @return
      */
@@ -113,7 +124,6 @@ public class Parser {
     }
 
     /**
-     *
      * @param line
      * @return
      */
@@ -124,26 +134,23 @@ public class Parser {
     }
 
     /**
-     *
      * @param line
      * @return
      */
     public boolean isMethod(String line) {
-        return line.endsWith("{") && (line.startsWith("public") || line.startsWith("private") ||
-                line.startsWith("protected")) && (line.contains("int") || line.contains("boolean") ||
-                line.contains("void") || line.contains("String")) && !line.startsWith("public class");
+        // regex source : https://stackoverflow.com/questions/68633/regex-that-will-match-a-java-method-declaration
+        String regex = "(public|protected|private|static|\\s) +[\\w\\<\\>\\[\\]]+\\s+(\\w+) *\\([^\\)]*\\) *(\\{?|[^;])";
+        return line.matches(regex);
     }
 
     /**
-     *
      * @param lines
      * @return
      */
     public ArrayList<String> findMethods(List<String> lines) {
         ArrayList<String> methods = new ArrayList<>();
-
         for (String st : lines) {
-            st = st.replaceAll(" ", "");
+            st = st.trim();
             if (isMethod(st)) {
                 methods.add(st);
             }
@@ -152,7 +159,6 @@ public class Parser {
     }
 
     /**
-     *
      * @param lines
      * @param method
      * @return
@@ -163,7 +169,7 @@ public class Parser {
 
         ArrayList<String> tempArray = new ArrayList<>();
         for (String line : lines) {
-            line = line.replaceAll(" ", "");
+            line = line.trim();
             if (line.equals(method)) {
                 tempArray.add(line);
                 boolMethod = true;
@@ -185,16 +191,5 @@ public class Parser {
         }
         return tempArray;
     }
-
-//    public String removeSpaces(String line) {
-//        String[] temp = line.split(" ");
-//        ArrayList<String> tempArray = new ArrayList<>();
-//        for (int i = 0; i < temp.length; i++) {
-//            if (!temp[i].equals(" ")) {
-//                tempArray.add(temp[i]);
-//            }
-//        }
-//        return String.join("", tempArray);
-//    }
 
 }
