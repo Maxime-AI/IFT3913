@@ -3,7 +3,7 @@ Les classes et méthodes les moins bien commentées du projet jfreechart
 =======================================================================
 
   
-        Classe 
+        Class 
 	=========
 	1 .Name: XYPlot       | loc: 5068 cloc: 2344 class_DC: 0.46251 wmc: 446 class_BC: 0.001037
   
@@ -11,10 +11,11 @@ Les classes et méthodes les moins bien commentées du projet jfreechart
   
 	3. Name: ChartPanel   | loc: 2766 cloc: 1146 class_DC: 0.4143  wmc: 292 class_BC: 0.001419
   
-  Solution (Class):
+  Solution (Class): Regarding the classes, we took into account the Weighted Method Count (wmc) as well as the number of
+  lines of code in order to assess its quality.
   
 
-	Méthode
+	Method
 	=========
 	1. Path: XYPlot/equals_Object       | loc: 131 cloc: 0 method_DC: 0     CC: 57 method_BC: 0
   
@@ -22,11 +23,12 @@ Les classes et méthodes les moins bien commentées du projet jfreechart
   
 	3. Path: PiePlot/equals_Object      | loc: 110 cloc: 1 method_DC: 0.009 CC: 50 method_BC: 1.82E-04
 
-  Solution (Method):
+  Solution (Method): Regarding the methods, we took into account the complexity(CC) as well as the number of lines of
+  code in order to evaluate the quality of this one.
 
-  Improvement: in terms of classes it would be important to increase
-  the number of comments where the complexity of McCabe (CC) increases in
-  methods or to reduce this complexity, if possible, while
+  Improvement: In terms of classes, it would be important to increase
+  the number of comments where the complexity of McCabe or Cyclomatic Complexity(CC)
+  increases in the methods or to reduce this complexity, if possible, while
   continuing to comment on operations and changes.
 
       
