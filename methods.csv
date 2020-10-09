@@ -1,4 +1,3 @@
-chemin, class, method, method_LOC,  method_CLOC, method_DC
-sourceFolder\test.java,test,publicstaticvoidmain(String[]args){,13,4,0.3076923076923077,
-sourceFolder\test.java,test,publicvoidallo(Stringargs,intx,Stringx){,4,1,0.25,
-sourceFolder\test.java,test,publicXYPointerAnnotation(Stringlabel,doublex,doubley,doubleangle){,11,0,0.0,
+chemin, class, method, method_LOC,  method_CLOC, method_DC, CC, methode_BC
+sourceFolder\test.java,test,main_String[],13,4,0.3076923076923077,1,0.3076923076923077,
+sourceFolder\test.java,test,allo_String_int_String,14,6,0.42857142857142855,3,0.14285714285714285,

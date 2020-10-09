@@ -7,8 +7,10 @@ import java.util.ArrayList;
 public class CSVGenerator {
 
     /**
+     * This method generates a csv file containing all the informations about the classes and methods of the java file.
      * @param type
      * @param list
+     * @return void
      */
     public void generateCSV(String type, ArrayList<ArrayList<String>> list) {
         File csvFile = new File(type + ".csv");

@@ -15,6 +15,7 @@ public class Parser {
     private ArrayList<Integer> WMCList = new ArrayList<>();
 
     /**
+     * This method gets a class and calculate its number of lines of code, lines of comments and other indexes.
      * @param filesList
      * @return ArrayList<ArrayList < String>> data of every class in the folder
      * @throws Exception
@@ -56,6 +57,7 @@ public class Parser {
     }
 
     /**
+     * This method gets methods  and calculate its number of lines of code, lines of comments and other indexes
      * @param filesList
      * @return ArrayList<ArrayList < String>> data of every method in the folder
      * @throws Exception
@@ -102,7 +104,7 @@ public class Parser {
     }
 
     /**
-     *
+     * This method adds all the indexes that goes into the data structure of getMethodsData
      * @param path
      * @param className
      * @param method
@@ -111,7 +113,7 @@ public class Parser {
      * @param methodDC
      * @param methodCC
      * @param methodBC
-     * @return
+     * @return ArrayList<String>
      */
     public ArrayList<String> addMethodData(String path, String className, String method, String methodLOC,
                                            String methodCLOC, String methodDC, String methodCC, String methodBC) {
@@ -128,9 +130,11 @@ public class Parser {
     }
 
     /**
-     *
+     * This method replace all the parameters of the methods by only their types and their names with
+     * underscores as spaces.
+     * ex: methodName_type1_type2
      * @param line
-     * @return
+     * @return String
      */
     public String cleanMethodName(String line) {
         String temp = line.replace("(", " ").replace(")", " ").replace("{", "").replace(",", "");
@@ -161,8 +165,9 @@ public class Parser {
     }
 
     /**
+     * This method analyzes if a line contains some predicate from the complexity of McCabe or not and gives it a state.
      * @param line
-     * @return
+     * @return boolean
      */
     public boolean checkCC(String line) {
         return line.contains("for") || line.contains("if") || line.contains("else if") || line.contains("while") ||
@@ -170,8 +175,9 @@ public class Parser {
     }
 
     /**
+     * This method analyzes if a line is a comment or not and gives it a state (true or false).
      * @param line
-     * @return
+     * @return boolean
      */
     public boolean isComment(String line) {
         return line.startsWith("//") || line.startsWith("*") || line.startsWith("/*") || line.startsWith("*/")
@@ -180,8 +186,9 @@ public class Parser {
     }
 
     /**
+     * This method analyzes if a line is a method or not and gives it a state (true or false).
      * @param line
-     * @return
+     * @return boolean
      */
     public boolean isMethod(String line) {
         // regex source : https://stackoverflow.com/questions/68633/regex-that-will-match-a-java-method-declaration
@@ -190,8 +197,9 @@ public class Parser {
     }
 
     /**
+     * This method finds if a line in the file is a method and stores it in a Arraylist.
      * @param lines
-     * @return
+     * @return ArrayList<String>
      */
     public ArrayList<String> findMethods(List<String> lines) {
         ArrayList<String> methods = new ArrayList<>();
@@ -205,9 +213,10 @@ public class Parser {
     }
 
     /**
+     * This method finds  the content inside of a method.
      * @param lines
      * @param method
-     * @return
+     * @return  ArrayList<String>
      */
     public ArrayList<String> findMethodContent(List<String> lines, String method) {
         int bracketCount = 0;

@@ -1,7 +1,11 @@
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+*@author : Maxime Lechasseur
+*@author : Han Zhang
+*
+ */
 public class Main {
     public static void main(String[] args) throws Exception {
 //        long start = System.currentTimeMillis();
