@@ -26,9 +26,9 @@ Les classes et méthodes les moins bien commentées du projet jfreechart
   Solution (Method): Regarding the methods, we took into account the complexity(CC) as well as the number of lines of
   code in order to evaluate the quality of this one.
 
-  Improvement: in terms of classes it would be important to increase
-  the number of comments where the complexity of McCabe (CC) increases in
-  methods or to reduce this complexity, if possible, while
+  Improvement: In terms of classes, it would be important to increase
+  the number of comments where the complexity of McCabe or Cyclomatic Complexity(CC)
+  increases in the methods or to reduce this complexity, if possible, while
   continuing to comment on operations and changes.
 
       
