@@ -6,13 +6,13 @@ import java.util.stream.Collectors;
 public class FilesManager {
 
     /**
-     * @source : https://stackoverflow.com/questions/1844688/how-to-read-all-files-in-a-folder-from-java
-     * This method takes a file and read through it.
-     * @param folder
+     * This method takes a root folder and gets all the .java files in it.
+     * @param folder root folder
      * @return List<File> list of all java files in the folder
      * @throws Exception
      */
     public List<File> getFiles(String folder) throws Exception {
+        //inspired from https://stackoverflow.com/questions/1844688/how-to-read-all-files-in-a-folder-from-java
         return Files.walk(Paths.get(folder))
                 .filter(p -> p.getFileName().toString().endsWith(".java"))
                 .map(Path::toFile)
