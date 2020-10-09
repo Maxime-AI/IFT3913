@@ -10,13 +10,18 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+/**
+ * Goes through all the lines of code and and generates
+ */
 public class Parser {
 
+    //keeping a list of the wmc values of each class
     private ArrayList<Integer> WMCList = new ArrayList<>();
 
     /**
-     * This method gets a class and calculate its number of lines of code, lines of comments and other indexes.
-     * @param filesList
+     * This method gets a class and calculates their number of lines of code, lines of comments and other metrics.
+     *
+     * @param filesList list of files
      * @return ArrayList<ArrayList < String>> data of every class in the folder
      * @throws Exception
      */
@@ -24,6 +29,7 @@ public class Parser {
         ArrayList<ArrayList<String>> classesData = new ArrayList<>();
         int index = 0;
 
+        //going through each file
         for (File path : filesList) {
             BufferedReader br = new BufferedReader(new FileReader(new File(String.valueOf(path))));
             String className = path.getName().replace(".java", "");
@@ -31,6 +37,7 @@ public class Parser {
             int classCLOC = 0;
             String line;
 
+            //going through each line to check for a comment
             while ((line = br.readLine()) != null) {
                 line = line.trim();
 
@@ -51,25 +58,27 @@ public class Parser {
             classesData.add(new ArrayList<>(data));
             br.close();
             index++;
-
         }
         return classesData;
     }
 
     /**
-     * This method gets methods  and calculate its number of lines of code, lines of comments and other indexes
-     * @param filesList
+     * This method gets methods and calculates their number of lines of code, lines of comments and other metrics
+     *
+     * @param filesList list of files
      * @return ArrayList<ArrayList < String>> data of every method in the folder
-     * @throws Exception
+     * @throws Exception exception
      */
     public ArrayList<ArrayList<String>> getMethodsData(List<File> filesList) throws Exception {
         ArrayList<ArrayList<String>> methodsData = new ArrayList<>();
 
+        //going through each file
         for (File path : filesList) {
             List<String> lines = Files.readAllLines(Paths.get(String.valueOf(path)));
             ArrayList<String> methods = findMethods(lines);
             int WMC = 0;
 
+            //going through each method of a class
             for (String method : methods) {
                 String className = path.getName().replace(".java", "");
                 ArrayList<String> temp = findMethodContent(lines, method);
@@ -77,6 +86,7 @@ public class Parser {
                 int methodCLOC = 0;
                 int methodCC = 1;
 
+                //going through each line of a method
                 for (String line : temp) {
                     if ("".equals(line)) {
                         continue;
@@ -104,7 +114,8 @@ public class Parser {
     }
 
     /**
-     * This method adds all the indexes that goes into the data structure of getMethodsData
+     * This method adds all the values of the metrics of a method into a single ArrayList
+     *
      * @param path
      * @param className
      * @param method
@@ -130,20 +141,26 @@ public class Parser {
     }
 
     /**
-     * This method replace all the parameters of the methods by only their types and their names with
-     * underscores as spaces.
-     * ex: methodName_type1_type2
-     * @param line
+     * This method gets the name and arrgument types of a method, joining them with underscores and
+     * ignoring access modifiers and return type.
+     * ex: public void methodName(typeOfArg1 arg1, typeOfArg2 arg2) -> methodName_type1_type2
+     *
+     * @param line of code
      * @return String
      */
     public String cleanMethodName(String line) {
-        String temp = line.replace("(", " ").replace(")", " ").replace("{", "").replace(",", "");
+        //removing "(", ")", ",", and "{"
+        String temp = line.replace("(", " ").replace(")", " ").replace("{"
+                , "").replace(",", "");
 
+        //separating the string into words
         List<String> list = Stream.of(temp.split(" "))
                 .map(String::trim)
                 .collect(Collectors.toList());
 
+        //removing empty words
         list.removeAll(Collections.singleton(""));
+
         if (list.contains("static")) {
             list.remove(0);
         }
@@ -156,7 +173,12 @@ public class Parser {
         }
 
         StringBuilder method = new StringBuilder();
-        method.append(list.get(0));
+
+        if (!list.isEmpty()) {
+            method.append(list.get(0));
+        }
+
+        //joining the words back into one string
         for (int i = 1; i < list.size(); i += 2) {
             method.append("_").append(list.get(i));
         }
@@ -166,7 +188,8 @@ public class Parser {
 
     /**
      * This method analyzes if a line contains some predicate from the complexity of McCabe or not and gives it a state.
-     * @param line
+     *
+     * @param line of code
      * @return boolean
      */
     public boolean checkCC(String line) {
@@ -175,8 +198,9 @@ public class Parser {
     }
 
     /**
-     * This method analyzes if a line is a comment or not and gives it a state (true or false).
-     * @param line
+     * This method analyzes if a line contains a comment or not.
+     *
+     * @param line of code
      * @return boolean
      */
     public boolean isComment(String line) {
@@ -186,8 +210,9 @@ public class Parser {
     }
 
     /**
-     * This method analyzes if a line is a method or not and gives it a state (true or false).
-     * @param line
+     * This method analyzes if a line is a method or not and returns true or false.
+     *
+     * @param line of code
      * @return boolean
      */
     public boolean isMethod(String line) {
@@ -197,8 +222,9 @@ public class Parser {
     }
 
     /**
-     * This method finds if a line in the file is a method and stores it in a Arraylist.
-     * @param lines
+     * This method finds the methods in a class and return them in a Arraylist.
+     *
+     * @param lines of code
      * @return ArrayList<String>
      */
     public ArrayList<String> findMethods(List<String> lines) {
@@ -213,32 +239,36 @@ public class Parser {
     }
 
     /**
-     * This method finds  the content inside of a method.
-     * @param lines
-     * @param method
-     * @return  ArrayList<String>
+     * This method goes through a list of code lines and finds the content of a specified method by taking everything
+     * from the first "{" and  last "}" by incrementing and decrementing the number of brackets.
+     *
+     * @param lines  of code
+     * @param method that we want to find the content of
+     * @return ArrayList<String>
      */
     public ArrayList<String> findMethodContent(List<String> lines, String method) {
-        int bracketCount = 0;
+        int bracketNum = 0;
         boolean boolMethod = false;
 
         ArrayList<String> tempArray = new ArrayList<>();
         for (String line : lines) {
             line = line.trim();
+
+            //inspired from : https://stackoverflow.com/questions/36169838/counting-and-braces-in-program-java
             if (line.equals(method)) {
                 tempArray.add(line);
                 boolMethod = true;
                 if (line.contains("{")) {
-                    bracketCount++;
+                    bracketNum++;
                 }
             } else if (boolMethod) {
                 tempArray.add(line);
-                if (!line.contains("}") && line.contains("{")) {
-                    bracketCount++;
-                } else if (line.contains("}") && !line.contains("{")) {
-                    bracketCount--;
+                if (line.contains("{") && !line.contains("}")) {
+                    bracketNum++;
+                } else if (!line.contains("{") && line.contains("}")) {
+                    bracketNum--;
                 }
-                if (bracketCount == 0) {
+                if (bracketNum == 0) {
                     boolMethod = false;
                     break;
                 }
@@ -246,5 +276,4 @@ public class Parser {
         }
         return tempArray;
     }
-
 }
