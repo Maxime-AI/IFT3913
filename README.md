@@ -41,8 +41,8 @@ Source: https://stackoverflow.com/questions/394616/running-jar-file-on-windows
 The classes et methods that are less well commented on the jfreechart project
 ===============================================================================
 
-* classes
-  ========
+classes
+========
 
   
   
@@ -56,8 +56,8 @@ The classes et methods that are less well commented on the jfreechart project
   Solution (Class): Regarding the classes, we took into account the Weighted Method Count (wmc) as well as the number of
   lines of code in order to assess its quality.
   
-* Methods
-  ========
+Methods
+========
   
 
 
