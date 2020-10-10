@@ -1,4 +1,4 @@
-# IFT3913 TP1
+# CodeQualityChecker
 
 * This program analyses java code and generates csv files containing different metrics such as LOC, CLOC and
   cyclomatic complexity, with the classes and methods of the files in the source folder.
@@ -20,7 +20,7 @@
  - The Weighted Method Count(WMC) : "is a good indicator of how much time and effort is required to modify and maintain this class. The WMC metric is defined as the sum of complexities of all methods declared in a class." 
  Source: https://phpmd.org/rules/codesize.html#:~:text=The%20Weighted%20Method%20Count%20(WMC,methods%20declared%20in%20a%20class.
  
- How to run the project
+ How to run the project?
 ==========================
 
 Go to our Jar file: "IFT3913 TP1.jar"
