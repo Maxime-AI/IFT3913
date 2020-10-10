@@ -8,11 +8,17 @@
  
  How to run the project
 ==========================
+
 Step 1: Open a notepad.exe.
+
 Step 2: Write : java -jar Example. jar.
+
 Step 3: Save it with the extension . bat.
+
 Step 4: Copy it to the directory which has the . jar file.
+
 Step 5: Double click it to run your . jar file.
+
 
 Source: https://stackoverflow.com/questions/394616/running-jar-file-on-windows
 
