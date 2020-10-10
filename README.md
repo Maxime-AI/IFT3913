@@ -1,6 +1,23 @@
 # IFT3913 TP1
-Les classes et méthodes les moins bien commentées du projet jfreechart
-=======================================================================
+
+* This program analyses java code and generates csv files containing different metrics such as LOC, CLOC and
+ * cyclomatic complexity, with the classes and methods of the files in the source folder.
+ *
+ * @author : Maxime Lechasseur
+ * @author : Han Zhang
+ 
+ How to run the project
+==========================
+Step 1: Open a notepad.exe.
+Step 2: Write : java -jar Example. jar.
+Step 3: Save it with the extension . bat.
+Step 4: Copy it to the directory which has the . jar file.
+Step 5: Double click it to run your . jar file.
+
+Source: https://stackoverflow.com/questions/394616/running-jar-file-on-windows
+
+The classes et methodes that are less well commented on the jfreechart project
+===============================================================================
 
   
         Class 
