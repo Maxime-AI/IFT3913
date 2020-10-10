@@ -23,11 +23,11 @@
  How to run the project?
 ==========================
 
-Go to our Jar file: "IFT3913 TP1.jar"
+Go to our Jar file: "TP1.jar"
 
 * Step 1: Open a notepad.exe.
 
-* Step 2: Write : java -jar IFT3913 TP1.jar.
+* Step 2: Write : java -jar TP1.jar.
 
 * Step 3: Save it with the extension . bat.
 
