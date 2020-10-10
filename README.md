@@ -45,6 +45,7 @@ The classes et methods that are less well commented on the jfreechart project
   ========
 
   
+  
        
 	1 .Name: XYPlot       | loc: 5068 cloc: 2344 class_DC: 0.46251 wmc: 446 class_BC: 0.001037
   
@@ -58,6 +59,7 @@ The classes et methods that are less well commented on the jfreechart project
 * Methods
   ========
   
+
 
 	
 	1. Path: XYPlot/equals_Object       | loc: 131 cloc: 0 method_DC: 0     CC: 57 method_BC: 0
