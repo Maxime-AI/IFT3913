@@ -29,7 +29,7 @@
 
 * Step 2: Run this command : "java -jar TP1.jar".
 
-* PS : If the source folder is missing, it will create a folder called "sourceFolder" then stop, in that case, run the command a second time.
+* Important : If the source folder is missing, it will create a folder called "sourceFolder" and stop. Then, after this, run the command a second time.
 
 The classes et methods that are less well commented on the jfreechart project
 ===============================================================================
