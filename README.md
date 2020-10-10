@@ -38,12 +38,14 @@ Go to our Jar file:
 
 Source: https://stackoverflow.com/questions/394616/running-jar-file-on-windows
 
-The classes et methodes that are less well commented on the jfreechart project
+The classes et methods that are less well commented on the jfreechart project
 ===============================================================================
 
+classes
+========
+
   
-        Class 
-	=========
+       
 	1 .Name: XYPlot       | loc: 5068 cloc: 2344 class_DC: 0.46251 wmc: 446 class_BC: 0.001037
   
 	2. Name: CategoryPlot | loc: 4630 cloc: 2228 class_DC: 0.48121 wmc: 398 class_BC: 0.001209
@@ -53,9 +55,11 @@ The classes et methodes that are less well commented on the jfreechart project
   Solution (Class): Regarding the classes, we took into account the Weighted Method Count (wmc) as well as the number of
   lines of code in order to assess its quality.
   
+Methods
+========
+  
 
-	Method
-	=========
+	
 	1. Path: XYPlot/equals_Object       | loc: 131 cloc: 0 method_DC: 0     CC: 57 method_BC: 0
   
 	2. Path: CategoryPlot/equals_Object | loc: 115 cloc: 0 method_DC: 0     CC: 52 method_BC: 0
