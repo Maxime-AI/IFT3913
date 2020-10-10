@@ -1,12 +1,29 @@
 # IFT3913 TP1
 
-This program analyses java code and generates csv files containing different metrics such as LOC, CLOC and
-cyclomatic complexity, with the classes and methods of the files in the source folder.
+* This program analyses java code and generates csv files containing different metrics such as LOC, CLOC and
+ * cyclomatic complexity, with the classes and methods of the files in the source folder.
+ *
+ * @author : Maxime Lechasseur
+ * @author : Han Zhang
+ 
+ Glossary
+===========
 
-Authors : Maxime Lechasseur, Han Zhang
+ - Commentary lines of code(CLOC) : The number of commentary lines of code found in a file.  
+
+ - Lines of code(LOC) : The number of non-empty and non-commentary lines of code, also known as lines of source code(SLOC), found in a file.
+
+ - Comments density(DC) : The ratio of comments(CLOC) per lines of code(LOC) in a program file.
+ 
+ - Cyclomatic Complexity(CC) :  "is a software metric used to indicate the complexity of a program. It is a quantitative measure of the number of linearly independent paths through a program's source code. It was developed by Thomas J. McCabe, Sr. in 1976." Source: https://en.wikipedia.org/wiki/Cyclomatic_complexity
+ 
+ - The Weighted Method Count(WMC) : "is a good indicator of how much time and effort is required to modify and maintain this class. The WMC metric is defined as the sum of complexities of all methods declared in a class." 
+ Source: https://phpmd.org/rules/codesize.html#:~:text=The%20Weighted%20Method%20Count%20(WMC,methods%20declared%20in%20a%20class.
  
  How to run the project
 ==========================
+
+Go to our Jar file: 
 
 Step 1: Open a notepad.exe.
 
