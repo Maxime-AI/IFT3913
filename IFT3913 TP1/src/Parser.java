@@ -12,6 +12,9 @@ import java.util.stream.Stream;
 
 /**
  * Goes through all the lines of code and and generates
+ *
+ * @author Maxime Lechasseur
+ * @author Han Zhang
  */
 public class Parser {
 
@@ -22,7 +25,7 @@ public class Parser {
      * This method gets a class and calculates their number of lines of code, lines of comments and other metrics.
      *
      * @param filesList list of files
-     * @return ArrayList<ArrayList < String>> data of every class in the folder
+     * @return 2D ArrayList containing the metrics of every class in the folder
      * @throws Exception
      */
     public ArrayList<ArrayList<String>> getClassData(List<File> filesList) throws Exception {
@@ -66,8 +69,8 @@ public class Parser {
      * This method gets methods and calculates their number of lines of code, lines of comments and other metrics
      *
      * @param filesList list of files
-     * @return ArrayList<ArrayList < String>> data of every method in the folder
-     * @throws Exception exception
+     * @return 2D ArrayList containing the metrics of every method in the folder
+     * @throws Exception
      */
     public ArrayList<ArrayList<String>> getMethodsData(List<File> filesList) throws Exception {
         ArrayList<ArrayList<String>> methodsData = new ArrayList<>();
@@ -124,7 +127,7 @@ public class Parser {
      * @param methodDC
      * @param methodCC
      * @param methodBC
-     * @return ArrayList<String>
+     * @return ArrayList containing the data
      */
     public ArrayList<String> addMethodData(String path, String className, String method, String methodLOC,
                                            String methodCLOC, String methodDC, String methodCC, String methodBC) {
@@ -143,10 +146,10 @@ public class Parser {
     /**
      * This method gets the name and arrgument types of a method, joining them with underscores and
      * ignoring access modifiers and return type.
-     * ex: public void methodName(typeOfArg1 arg1, typeOfArg2 arg2) -> methodName_type1_type2
+     * ex: public void methodName(typeOfArg1 arg1, typeOfArg2 arg2) becomes methodName_typeOfArg1_typeOfArg2
      *
      * @param line of code
-     * @return String
+     * @return cleaned method
      */
     public String cleanMethodName(String line) {
         //removing "(", ")", ",", and "{"
@@ -225,7 +228,7 @@ public class Parser {
      * This method finds the methods in a class and return them in a Arraylist.
      *
      * @param lines of code
-     * @return ArrayList<String>
+     * @return ArrayList of methods as strings
      */
     public ArrayList<String> findMethods(List<String> lines) {
         ArrayList<String> methods = new ArrayList<>();
@@ -244,7 +247,7 @@ public class Parser {
      *
      * @param lines  of code
      * @param method that we want to find the content of
-     * @return ArrayList<String>
+     * @return ArrayList of methods as strings and their content
      */
     public ArrayList<String> findMethodContent(List<String> lines, String method) {
         int bracketNum = 0;

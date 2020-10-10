@@ -1,5 +1,5 @@
 chemin, class, classe_LOC, classe_CLOC, classe_DC, WMC, classe_BC
-sourceFolder\test.java,test,32,10,0.3125,4,0.078125,
-sourceFolder\test1.java,test1,8,2,0.25,2,0.125,
 sourceFolder\test2.java,test2,14,9,0.6428571428571429,1,0.6428571428571429,
 sourceFolder\test3.java,test3,11,7,0.6363636363636364,1,0.6363636363636364,
+sourceFolder\testFolder\test.java,test,32,10,0.3125,4,0.078125,
+sourceFolder\testFolder\test1.java,test1,8,2,0.25,2,0.125,

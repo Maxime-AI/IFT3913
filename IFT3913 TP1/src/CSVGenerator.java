@@ -7,8 +7,8 @@ import java.util.ArrayList;
 /**
  * Generates a csv file containing all the informations about the classes and methods of the java file.
  *
- * @author : Maxime Lechasseur
- * @author : Han Zhang
+ * @author Maxime Lechasseur
+ * @author Han Zhang
  */
 public class CSVGenerator {
 

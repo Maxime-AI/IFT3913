@@ -1,6 +1,6 @@
 chemin, class, methode, methode_LOC,  methode_CLOC, methode_DC, CC, methode_BC
-sourceFolder\test.java,test,main_String[],13,4,0.3076923076923077,1,0.3076923076923077,
-sourceFolder\test.java,test,allo_String_int_String,14,6,0.42857142857142855,3,0.14285714285714285,
-sourceFolder\test1.java,test1,array_temp_ArrayList<String>,5,2,0.4,2,0.2,
 sourceFolder\test2.java,test2,allo_String,12,9,0.75,1,0.75,
 sourceFolder\test3.java,test3,main_String[],3,1,0.3333333333333333,1,0.3333333333333333,
+sourceFolder\testFolder\test.java,test,main_String[],13,4,0.3076923076923077,1,0.3076923076923077,
+sourceFolder\testFolder\test.java,test,allo_String_int_String,14,6,0.42857142857142855,3,0.14285714285714285,
+sourceFolder\testFolder\test1.java,test1,array_temp_ArrayList<String>,5,2,0.4,2,0.2,

@@ -1,5 +1,6 @@
 import java.io.*;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,8 +9,8 @@ import java.util.List;
  * This program analyses java code and generates csv files containing different metrics such as LOC, CLOC and
  * cyclomatic complexity, with the classes and methods of the files in the source folder.
  *
- * @author : Maxime Lechasseur
- * @author : Han Zhang
+ * @author Maxime Lechasseur
+ * @author Han Zhang
  */
 public class Main {
     public static void main(String[] args) throws Exception {
@@ -20,7 +21,11 @@ public class Main {
         String folderName = "sourceFolder";
 
         //to prevent errors if the source folder doesn't exist
-        Files.createDirectories(Paths.get(folderName));
+        if (!Files.exists(Path.of(folderName))) {
+            Files.createDirectories(Paths.get(folderName));
+            System.out.println("Created source folder.");
+            return;
+        }
 
         List<File> filesList = filesManager.getFiles(folderName);
 

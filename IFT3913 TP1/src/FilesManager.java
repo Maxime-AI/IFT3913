@@ -6,8 +6,8 @@ import java.util.stream.Collectors;
 /**
  * Manages the source folder
  *
- * @author : Maxime Lechasseur
- * @author : Han Zhang
+ * @author Maxime Lechasseur
+ * @author Han Zhang
  */
 public class FilesManager {
 
@@ -15,7 +15,7 @@ public class FilesManager {
      * This method takes a root folder and gets all the .java files in it.
      *
      * @param folder root folder
-     * @return List<File> list of all java files in the folder
+     * @return list of all java files in the folder
      * @throws Exception exception
      */
     public List<File> getFiles(String folder) throws Exception {
