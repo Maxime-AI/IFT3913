@@ -1,8 +1,8 @@
 # IFT3913 TP1
 
 * This program analyses java code and generates csv files containing different metrics such as LOC, CLOC and
- * cyclomatic complexity, with the classes and methods of the files in the source folder.
- *
+  cyclomatic complexity, with the classes and methods of the files in the source folder.
+ 
  * @author : Maxime Lechasseur
  * @author : Han Zhang
  
@@ -25,15 +25,15 @@
 
 Go to our Jar file: 
 
-Step 1: Open a notepad.exe.
+*Step 1: Open a notepad.exe.
 
-Step 2: Write : java -jar Example. jar.
+*Step 2: Write : java -jar Example. jar.
 
-Step 3: Save it with the extension . bat.
+*Step 3: Save it with the extension . bat.
 
-Step 4: Copy it to the directory which has the . jar file.
+*Step 4: Copy it to the directory which has the . jar file.
 
-Step 5: Double click it to run your . jar file.
+*Step 5: Double click it to run your . jar file.
 
 
 Source: https://stackoverflow.com/questions/394616/running-jar-file-on-windows
