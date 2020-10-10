@@ -3,8 +3,7 @@
 This program analyses java code and generates csv files containing different metrics such as LOC, CLOC and
 cyclomatic complexity, with the classes and methods of the files in the source folder.
 
-Authors : Maxime Lechasseur
-	: Han Zhang
+Authors : Maxime Lechasseur, Han Zhang
  
  How to run the project
 ==========================
