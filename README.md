@@ -1,10 +1,10 @@
 # IFT3913 TP1
 
-* This program analyses java code and generates csv files containing different metrics such as LOC, CLOC and
- * cyclomatic complexity, with the classes and methods of the files in the source folder.
- *
- * @author : Maxime Lechasseur
- * @author : Han Zhang
+This program analyses java code and generates csv files containing different metrics such as LOC, CLOC and
+cyclomatic complexity, with the classes and methods of the files in the source folder.
+
+Authors : Maxime Lechasseur
+	: Han Zhang
  
  How to run the project
 ==========================
